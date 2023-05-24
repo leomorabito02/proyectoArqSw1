@@ -3,8 +3,6 @@ package db
 import (
 	"../proyectoArqSw1/model"
 	"github.com/jinzhu/gorm"
-	"github.com/jinzhu/gorm/dialects/mysql"
- 	"github.com/sirupsen/logrus"
 )
 
 var (
@@ -15,7 +13,7 @@ var (
 func init() {
 	// DB Connections Paramters
 	DBName := "arqsw"
-	DBUser := "root" //a chequear
+	DBUser := "root"
 	DBPass := ""
 	//DBPass := os.Getenv("MVC_DB_PASS")
 	DBHost := "root"
@@ -31,14 +29,14 @@ func init() {
 	}
 
 	// We need to add all CLients that we build
-	usuarioClient.Db = db
+	userClient.Db = db
 	reservaClient.Db = db
 	hotelClient.Db = db
 }
 
 func StartDbEngine() {
 	// We need to migrate all classes model.
-	db.AutoMigrate(&model.Usuario{})
+	db.AutoMigrate(&model.User{})
 	db.AutoMigrate(&model.Reserva{})
 	db.AutoMigrate(&model.Hotel{})
 

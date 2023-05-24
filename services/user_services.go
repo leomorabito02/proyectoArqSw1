@@ -1,13 +1,9 @@
 package services
 
 import (
-	usuarioClient"proyectoArqSw1/clients/usuario"
-	reservaClient "mvc-go/clients/reserva"
-	hotelClient "mvc-go/clients/hotel"
-
 	"mvc-go/dto"
 	"mvc-go/model"
-	e "mvc-go/utils/errors" 
+	e "mvc-go/utils/errors"
 )
 
 type userService struct{}
