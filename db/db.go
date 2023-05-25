@@ -1,7 +1,7 @@
 package db
 
 import (
-	"../proyectoArqSw1/model"
+	"proyectoArqSw1/model"
 	"github.com/jinzhu/gorm"
 )
 
