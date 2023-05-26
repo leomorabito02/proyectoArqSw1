@@ -1,6 +1,6 @@
 package hotel
 
-//ORM tradutcotr
+//ORM traductor
 import (
 	"proyectoArqSw1/model"
 
@@ -33,11 +33,12 @@ func GetHotelesByDisponibilidad(fecha_desde string, fecha_hasta string) model.Ho
 	var hoteles model.Hoteles
 
 	var count int
-	Db.model(&model.reserva{}).
+	Db.Model(&model.reserva{}).
 		Where("fecha_desde <= ?", fecha_desde).
 		And("fecha_hasta >= ?", fecha_hasta).
 		Count(&count).
-		Group()
+		Group("hotel_id")
+	//Find(&hoteles)
 
 	log.Debug("Hoteles disponibles: ", hoteles)
 
