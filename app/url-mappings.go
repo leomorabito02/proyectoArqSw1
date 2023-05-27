@@ -1,9 +1,9 @@
 package app
 
 import (
-	hotelController "proyectoArqSw1/controllers/hotel"
-	reservaController "proyectoArqSw1/controllers/reserva"
-	userController "proyectoArqSw1/controllers/user"
+	hotelController "repo/controllers/hotel"
+	reservaController "repo/controllers/reserva"
+	userController "repo/controllers/user"
 
 	log "github.com/sirupsen/logrus"
 )
