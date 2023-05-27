@@ -1,6 +1,10 @@
 package app
 
 import (
+	hotelController "proyectoArqSw1/controllers/hotel"
+	reservaController "proyectoArqSw1/controllers/reserva"
+	userController "proyectoArqSw1/controllers/user"
+
 	log "github.com/sirupsen/logrus"
 )
 
@@ -13,7 +17,7 @@ func mapUrls() {
 
 	//Hotel Mapping
 	router.GET("/hotel/:id", hotelController.GetHotelById)
-	router.GET("/hotel", productController.GetHoteles) //agregar
+	router.GET("/hotel", hotelController.GetHoteles) //agregar
 
 	//Order Mapping
 	router.POST("/reserva", reservaController.ReservaInsert)

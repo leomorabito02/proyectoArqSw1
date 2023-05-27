@@ -1,17 +1,21 @@
 package services
 
 import (
+	hotelCliente "proyectoArqSw1/clients/hotel"
 	reservaCliente "proyectoArqSw1/clients/reserva"
 	"proyectoArqSw1/dto"
 	"proyectoArqSw1/model"
 	e "proyectoArqSw1/utils/errors"
+	"time"
+
+	"github.com/dgrijalva/jwt-go"
 )
 
 type reservaService struct{}
 
 type reservaServiceInterface interface {
 	InsertReserva(reservaDto dto.ReservaDto) (dto.ReservaDto, e.ApiError)
-	GetReservaByIdUser(token string) (dto.ReservaDto, e.ApiError)
+	GetReservasByIdUser(token string) (dto.ReservaDto, e.ApiError)
 }
 
 var (
@@ -26,23 +30,34 @@ func (s *reservaService) InsertReserva(reservaDto dto.ReservaDto) (dto.ReservaDt
 
 	var reserva model.Reserva
 
-	reservaDto.Id = reserva.Id
+	reserva.Id = reservaDto.Id
 	reserva.Fecha_desde = reservaDto.Fecha_desde
 	reserva.Fecha_hasta = reservaDto.Fecha_hasta
 	reserva.IdUser = reservaDto.IdUser
 	reserva.IdHotel = reservaDto.IdHotel
 
 	var hotelDto dto.HotelDto
-	var diferencia, cantDias int32
+	var diferencia time.Duration
+	var cantDias int32
 
-	hotelDto, _ = GetHotelById(reserva.IdHotel)
+	hotelDto, _ = hotelCliente.GetHotelById(reserva.IdHotel)
 	diferencia = reserva.Fecha_hasta.Sub(reserva.Fecha_desde)
-	cantDias = int32(int(diferencia.Hours() / 24))
+	cantDias = int32(diferencia.Hours() / 24)
 	reserva.Precio_total = hotelDto.Precio * cantDias
+
 	reserva = reservaCliente.InsertReserva(reserva)
 
-	return reservaDto, nil
+	var reservaResponseDto dto.ReservaDto
+
+	reservaResponseDto.Id = reserva.Id
+	reservaResponseDto.Fecha_desde = reserva.Fecha_desde
+	reservaResponseDto.Fecha_hasta = reserva.Fecha_hasta
+	reservaResponseDto.IdUser = reserva.IdUser
+	reservaResponseDto.IdHotel = reserva.IdHotel
+
+	return reservaResponseDto, nil
 }
+
 func (s *reservaService) GetReservasByIdUser(token string) (dto.ReservasDto, e.ApiError) {
 	var idUser float64
 	tkn, err := jwt.Parse(token, func(t *jwt.Token) (interface{}, error) { return jwtKey, nil })
