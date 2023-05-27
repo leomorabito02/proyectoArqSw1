@@ -2,8 +2,8 @@ package userController
 
 import (
 	"net/http"
-	"proyectoArqSw1/dto"
-	service "proyectoArqSw1/services"
+	"repo/dto"
+	service "repo/services"
 	"strconv"
 
 	_ "github.com/dgrijalva/jwt-go"

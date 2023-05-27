@@ -1,10 +1,10 @@
 package services
 
 import (
-	hotelCliente "proyectoArqSw1/clients/hotel"
-	"proyectoArqSw1/dto"
-	"proyectoArqSw1/model"
-	e "proyectoArqSw1/utils/errors"
+	hotelCliente "repo/clients/hotel"
+	"repo/dto"
+	"repo/model"
+	e "repo/utils/errors"
 )
 
 type hotelService struct{}

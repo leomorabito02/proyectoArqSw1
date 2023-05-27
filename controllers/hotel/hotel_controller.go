@@ -2,8 +2,8 @@ package hotelController
 
 import (
 	"net/http"
-	"proyectoArqSw1/dto"
-	service "proyectoArqSw1/services"
+	"repo/dto"
+	service "repo/services"
 	"strconv"
 
 	"github.com/gin-gonic/gin"

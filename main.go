@@ -1,8 +1,8 @@
 package main
 
 import (
-	"proyectoArqSw1/app"
-	"proyectoArqSw1/db"
+	"repo/app"
+	"repo/db"
 )
 
 func main() {

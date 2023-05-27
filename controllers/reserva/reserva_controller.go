@@ -2,8 +2,8 @@ package reservaController
 
 import (
 	"net/http"
-	"proyectoArqSw1/dto"
-	service "proyectoArqSw1/services"
+	"repo/dto"
+	service "repo/services"
 
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"

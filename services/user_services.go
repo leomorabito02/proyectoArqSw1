@@ -1,13 +1,15 @@
 package services
 
 import (
-	userCliente "proyectoArqSw1/clients/user"
-	"proyectoArqSw1/dto"
-	"proyectoArqSw1/model"
-	e "proyectoArqSw1/utils/errors"
+	"repo/dto"
+	"repo/model"
+	e "repo/utils/errors"
+
+	userCliente "repo/clients/user"
 
 	"crypto/md5"
 	"encoding/hex"
+
 	"github.com/dgrijalva/jwt-go"
 
 	log "github.com/sirupsen/logrus"
@@ -43,7 +45,7 @@ func (s *userService) GetUserById(id int) (dto.UserDto, e.ApiError) {
 	userDto.Password = user.Password
 	userDto.Tipo = user.Tipo
 	userDto.Dni = user.Dni
-	
+
 	return userDto, nil
 }
 

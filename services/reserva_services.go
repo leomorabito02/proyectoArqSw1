@@ -1,12 +1,14 @@
 package services
 
 import (
-	hotelCliente "proyectoArqSw1/clients/hotel"
-	reservaCliente "proyectoArqSw1/clients/reserva"
-	"proyectoArqSw1/dto"
-	"proyectoArqSw1/model"
-	e "proyectoArqSw1/utils/errors"
+	"repo/dto"
+	"repo/model"
+	e "repo/utils/errors"
 	"time"
+
+	reservaCliente "repo/clients/reserva"
+
+	hotelCliente "repo/clients/hotel"
 
 	"github.com/dgrijalva/jwt-go"
 )

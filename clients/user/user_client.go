@@ -1,7 +1,7 @@
 package user
 
 import (
-	"proyectoArqSw1/model"
+	"repo/model"
 
 	"github.com/jinzhu/gorm"
 	log "github.com/sirupsen/logrus"
