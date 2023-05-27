@@ -17,7 +17,7 @@ type reservaService struct{}
 
 type reservaServiceInterface interface {
 	InsertReserva(reservaDto dto.ReservaDto) (dto.ReservaDto, e.ApiError)
-	GetReservasByIdUser(token string) (dto.ReservaDto, e.ApiError)
+	GetReservasByIdUser(token string) (dto.ReservasDto, e.ApiError)
 }
 
 var (
@@ -38,14 +38,14 @@ func (s *reservaService) InsertReserva(reservaDto dto.ReservaDto) (dto.ReservaDt
 	reserva.IdUser = reservaDto.IdUser
 	reserva.IdHotel = reservaDto.IdHotel
 
-	var hotelDto dto.HotelDto
+	var hotel model.Hotel
 	var diferencia time.Duration
 	var cantDias int32
 
-	hotelDto, _ = hotelCliente.GetHotelById(reserva.IdHotel)
+	hotel = hotelCliente.GetHotelById(reserva.IdHotel)
 	diferencia = reserva.Fecha_hasta.Sub(reserva.Fecha_desde)
 	cantDias = int32(diferencia.Hours() / 24)
-	reserva.Precio_total = hotelDto.Precio * cantDias
+	reserva.Precio_total = float32(int32(hotel.Precio) * cantDias) //a super chequear
 
 	reserva = reservaCliente.InsertReserva(reserva)
 

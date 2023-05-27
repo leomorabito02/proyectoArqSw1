@@ -21,7 +21,7 @@ func InsertReserva(reserva model.Reserva) model.Reserva {
 }
 
 // busuqueda por idUser
-func GetReservasByIdUser(idUser int) model.Reserva {
+func GetReservasByIdUser(idUser int) model.Reservas {
 	var reservas model.Reservas
 
 	log.Debug("idUser: ", idUser)

@@ -5,6 +5,7 @@ import (
 	"repo/dto"
 	service "repo/services"
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
@@ -14,7 +15,7 @@ func GetHotelById(c *gin.Context) {
 	log.Debug("id de Hotel a cargar: " + c.Param("id"))
 
 	id, _ := strconv.Atoi(c.Param("id"))
-	var hotelDto dto.hotelDto
+	var hotelDto dto.HotelDto
 
 	hotelDto, err := service.HotelService.GetHotelById(id)
 
@@ -38,12 +39,25 @@ func GetHoteles(c *gin.Context) {
 }
 
 func GetHotelesByDisponibilidad(c *gin.Context) {
-	fechaDesde := c.Query("fecha_desde")
-	fechaHasta := c.Query("fecha_hasta")
+	fechaDesdeStr := c.Query("fecha_desde")
+	fechaHastaStr := c.Query("fecha_hasta")
 	// hace falta convertir tipo de dato de fecha¿?
 	var hotelesDto dto.HotelesDto
 
-	hotelesDto, err := service.GetHotelesByDisponibilidad(fechaDesde, fechaHasta)
+	fechaDesde, err := time.Parse("2006-01-02", fechaDesdeStr)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Formato fecha_desde inválido"})
+		return
+	}
+
+	fechaHasta, err := time.Parse("2006-01-02", fechaHastaStr)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Formato fecha_hasta inválido"})
+		return
+	}
+
+	hotelesDto, err = service.HotelService.GetHotelesByDisponibilidad(fechaDesde, fechaHasta)
 
 	if err != nil {
 		c.JSON(err.Status(), err)

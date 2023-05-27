@@ -5,6 +5,7 @@ import (
 	"repo/dto"
 	"repo/model"
 	e "repo/utils/errors"
+	"time"
 )
 
 type hotelService struct{}
@@ -12,7 +13,7 @@ type hotelService struct{}
 type hotelServiceInterface interface {
 	GetHotelById(id int) (dto.HotelDto, e.ApiError)
 	GetHoteles() (dto.HotelesDto, e.ApiError)
-	GetHotelesByDisponibilidad(fecha_desde string, fecha_hasta string) (dto.HotelesDto, e.ApiError)
+	GetHotelesByDisponibilidad(fecha_desde time.Time, fecha_hasta time.Time) (dto.HotelesDto, e.ApiError)
 }
 
 var (
@@ -58,15 +59,15 @@ func (s *hotelService) GetHoteles() (dto.HotelesDto, e.ApiError) {
 		hotelDto.Valoracion = hotel.Valoracion
 		hotelDto.Precio = hotel.Precio
 
-		hotelesDto = append(hotelesDto, hotelesDto) //append guarda la suma de "hotel"
+		hotelesDto = append(hotelesDto, hotelDto) //append guarda la suma de "hotel"
 	}
 
 	return hotelesDto, nil
 }
 
-func (s *hotelService) GetHotelesByDisponibilidad(fecha_desde string, fecha_hasta string) (dto.HotelesDto, e.ApiError) {
+func (s *hotelService) GetHotelesByDisponibilidad(fecha_desde time.Time, fecha_hasta time.Time) (dto.HotelesDto, e.ApiError) {
 
-	var hoteles model.Hoteles = hotelCliente.GetHotelesByDisponibilidad()
+	var hoteles model.Hoteles = hotelCliente.GetHotelesByDisponibilidad(fecha_desde, fecha_hasta)
 	var hotelesDto dto.HotelesDto
 	if len(hoteles) == 0 {
 		return hotelesDto, e.NewBadRequestApiError("No hay hoteles disponibles para la fecha")
@@ -81,7 +82,7 @@ func (s *hotelService) GetHotelesByDisponibilidad(fecha_desde string, fecha_hast
 		hotelDto.Valoracion = hotel.Valoracion
 		hotelDto.Precio = hotel.Precio
 
-		hotelesDto = append(hotelesDto, hotelesDto) //append guarda la suma de "hotel"
+		hotelesDto = append(hotelesDto, hotelDto) //append guarda la suma de "hotel"
 	}
 
 	return hotelesDto, nil

@@ -3,7 +3,12 @@ package db
 import (
 	"repo/model"
 
+	hotelClient "repo/clients/hotel"
+	reservaClient "repo/clients/reserva"
+	userClient "repo/clients/user"
+
 	"github.com/jinzhu/gorm"
+	log "github.com/sirupsen/logrus"
 )
 
 var (
