@@ -2,6 +2,7 @@ package db
 
 import (
 	"proyectoArqSw1/model"
+
 	"github.com/jinzhu/gorm"
 )
 
@@ -12,7 +13,7 @@ var (
 
 func init() {
 	// DB Connections Paramters
-	DBName := "arqsw"
+	DBName := "arqsw1"
 	DBUser := "root"
 	DBPass := ""
 	//DBPass := os.Getenv("MVC_DB_PASS")
