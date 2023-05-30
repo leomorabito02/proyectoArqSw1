@@ -38,11 +38,12 @@ func GetHoteles(c *gin.Context) {
 	c.JSON(http.StatusOK, hotelesDto)
 }
 
-func GetHotelesByDisponibilidad(c *gin.Context) {
+func GetHotelDisponibilidad(c *gin.Context) {
+	stringhotelID := c.Param("id")
+	hotelID, err := strconv.Atoi(stringhotelID)
 	fechaDesdeStr := c.Query("fecha_desde")
 	fechaHastaStr := c.Query("fecha_hasta")
 	// hace falta convertir tipo de dato de fecha¿?
-	var hotelesDto dto.HotelesDto
 
 	fechaDesde, err := time.Parse("2006-01-02", fechaDesdeStr)
 
@@ -57,12 +58,12 @@ func GetHotelesByDisponibilidad(c *gin.Context) {
 		return
 	}
 
-	hotelesDto, err = service.HotelService.GetHotelesByDisponibilidad(fechaDesde, fechaHasta)
+	disponibilidad, err2 := service.HotelService.GetHotelDisponibilidad(hotelID, fechaDesde, fechaHasta)
 
 	if err != nil {
-		c.JSON(err.Status(), err)
+		c.JSON(err2.Status(), err)
 		return
 	}
 
-	c.JSON(http.StatusOK, hotelesDto)
+	c.JSON(http.StatusOK, disponibilidad)
 }

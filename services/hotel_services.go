@@ -13,7 +13,7 @@ type hotelService struct{}
 type hotelServiceInterface interface {
 	GetHotelById(id int) (dto.HotelDto, e.ApiError)
 	GetHoteles() (dto.HotelesDto, e.ApiError)
-	GetHotelesByDisponibilidad(fecha_desde time.Time, fecha_hasta time.Time) (dto.HotelesDto, e.ApiError)
+	GetHotelDisponibilidad(hotelID int, fecha_desde time.Time, fecha_hasta time.Time) (dto.Disponibilidad, e.ApiError)
 }
 
 var (
@@ -65,26 +65,21 @@ func (s *hotelService) GetHoteles() (dto.HotelesDto, e.ApiError) {
 	return hotelesDto, nil
 }
 
-func (s *hotelService) GetHotelesByDisponibilidad(fecha_desde time.Time, fecha_hasta time.Time) (dto.HotelesDto, e.ApiError) {
+func (s *hotelService) GetHotelDisponibilidad(hotelID int, fecha_desde time.Time, fecha_hasta time.Time) (dto.Disponibilidad, e.ApiError) {
 
-	var hoteles model.Hoteles = hotelCliente.GetHotelesByDisponibilidad(fecha_desde, fecha_hasta)
-	var hotelesDto dto.HotelesDto
-	if len(hoteles) == 0 {
-		return hotelesDto, e.NewBadRequestApiError("No hay hoteles disponibles para la fecha")
-	}
-	for _, hotel := range hoteles {
-		var hotelDto dto.HotelDto
+	hotel := hotelCliente.GetHotelById(hotelID)
+	cantHDisponibles := hotelCliente.GetHabitacionesDisponibles(hotelID, hotel.Cant_habitaciones, fecha_desde, fecha_hasta)
 
-		hotelDto.Id = hotel.Id
-		hotelDto.Nombre = hotel.Nombre
-		hotelDto.Descripcion = hotel.Descripcion
-		hotelDto.Cant_habitaciones = hotel.Cant_habitaciones
-		hotelDto.Valoracion = hotel.Valoracion
-		hotelDto.Precio = hotel.Precio
-
-		hotelesDto = append(hotelesDto, hotelDto) //append guarda la suma de "hotel"
-	}
-
-	return hotelesDto, nil
+	return dto.Disponibilidad{
+		HabitacionesDisponibles: cantHDisponibles,
+		DetalleHotel: dto.HotelDto{
+			Id:                hotel.Id,
+			Nombre:            hotel.Nombre,
+			Descripcion:       hotel.Descripcion,
+			Cant_habitaciones: hotel.Cant_habitaciones,
+			Valoracion:        hotel.Valoracion,
+			Precio:            hotel.Precio,
+		},
+	}, nil
 
 }

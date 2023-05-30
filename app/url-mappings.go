@@ -16,6 +16,7 @@ func mapUrls() {
 	router.POST("/login", userController.UserLogin)
 
 	//Hotel Mapping
+	router.GET("/hotel/:id/habitaciones", hotelController.GetHotelDisponibilidad)
 	router.GET("/hotel/:id", hotelController.GetHotelById)
 	router.GET("/hotel", hotelController.GetHoteles) //agregar
 

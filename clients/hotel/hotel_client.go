@@ -29,28 +29,17 @@ func GetHoteles() model.Hoteles {
 	return hoteles
 }
 
-func GetHotelesByDisponibilidad(fecha_desde time.Time, fecha_hasta time.Time) model.Hoteles {
-	/*
-			Db.Select("hotel_id", "cant_habitaciones").Find(&hoteles)
+func GetHabitacionesDisponibles(hotelID int, totalHabitaciones int, fecha_desde time.Time, fecha_hasta time.Time) int {
 
-			Db.Model(&model.reserva{}).
-				Where("fecha_desde <= ?", fecha_desde).
-				And("fecha_hasta >= ?", fecha_hasta).
-				Count(&count).
-				Group("hotel_id")
-			//Find(&hoteles)
+	var cantReservas int
+	Db.Model(&model.Hotel{}).
+		Joins("join reservas on hoteles.id = reservas.hotel_id").
+		Where("hoteles.id= ?", hotelID).
+		Where("reservas.fecha_desde <= ?", fecha_desde).
+		Where("reservas.fecha_hasta <= ?", fecha_hasta).
+		Count(&cantReservas)
 
-			Db.Model(&model.hotel{}).Select("users.name, emails.email").
-				Joins("left join emails on emails.user_id = users.id").
-				Scan(&result{})
-			// SELECT users.name, emails.email FROM `users` left join emails on emails.user_id = users.id
+	//cantidadDeReservasEnLaFechaSeleecionada = "SELECT COUNT(*) from hotels h JOIN reservas r ON h.id = r.hotel_id WHERE h.hotel_id = hotelID AND r.fecha_desde <= fecha_desde AND r.fecha_hasta >= fechaHasta"
 
-			log.Debug("Hoteles disponibles: ", hoteles)
-
-		Db.Joins("JOIN hoteles ON hoteles.id = reserva.hotel_id").
-			Select("hotel.id, hotel.Cant_habitaciones, reserva.Fecha_desde, reserva.Fecha_hasta").
-			Find(&reservas)
-
-		return hoteles
-	*/
+	return totalHabitaciones - cantReservas
 }
