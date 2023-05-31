@@ -3,12 +3,12 @@ package db
 import (
 	"repo/model"
 
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/jinzhu/gorm"
+	log "github.com/sirupsen/logrus"
 	hotelClient "repo/clients/hotel"
 	reservaClient "repo/clients/reserva"
 	userClient "repo/clients/user"
-
-	"github.com/jinzhu/gorm"
-	log "github.com/sirupsen/logrus"
 )
 
 var (
@@ -22,7 +22,7 @@ func init() {
 	DBUser := "root"
 	DBPass := ""
 	//DBPass := os.Getenv("MVC_DB_PASS")
-	DBHost := "root"
+	DBHost := "localhost"
 	// ------------------------
 
 	db, err = gorm.Open("mysql", DBUser+":"+DBPass+"@tcp("+DBHost+":3306)/"+DBName+"?charset=utf8&parseTime=True")
