@@ -20,9 +20,8 @@ func mapUrls() {
 	router.GET("/hotel/:id", hotelController.GetHotelById)
 	router.GET("/hotel", hotelController.GetHoteles) //agregar
 
-	//Order Mapping
+	//Reserva Mapping
 	router.POST("/reserva", reservaController.ReservaInsert)
-
 	router.GET("/reservaUser/:idUser", reservaController.GetReservasByIdUser)
 
 	log.Info("Listo el mapeo de configuraciones :)")
