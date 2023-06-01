@@ -3,12 +3,13 @@ package db
 import (
 	"repo/model"
 
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/jinzhu/gorm"
-	log "github.com/sirupsen/logrus"
 	hotelClient "repo/clients/hotel"
 	reservaClient "repo/clients/reserva"
 	userClient "repo/clients/user"
+
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/jinzhu/gorm"
+	log "github.com/sirupsen/logrus"
 )
 
 var (

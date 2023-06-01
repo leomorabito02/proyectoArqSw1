@@ -4,9 +4,9 @@ import "time"
 
 type Reserva struct {
 	Id           int       `gorm:"primaryKey"`
-	Fecha_desde  time.Time `gorm:"type:date(300);not null"`
-	Fecha_hasta  time.Time `gorm:"type:date(300);not null"`
-	Precio_total float32   `gorm:"type:decimal(400);unsigned;not null"`
+	Fecha_desde  time.Time `gorm:"type:date;not null"`
+	Fecha_hasta  time.Time `gorm:"type:date;not null"`
+	Precio_total float32   `gorm:"type:decimal;unsigned;not null"`
 	IdHotel      int       `gorm:"type:integer;not null"`
 	IdUser       int       `gorm:"type:integer;not null"`
 
