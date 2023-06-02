@@ -20,7 +20,7 @@ type userService struct{}
 type userServiceInterface interface {
 	GetUserById(id int) (dto.UserDto, e.ApiError)
 	LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError)
-	InsertUser(userDto dto.UserDto) (dto.UserDto, e.ApiError)
+	InsertUser(userDto dto.UserDto) (dto.TokenDto, e.ApiError)
 }
 
 var (
@@ -86,21 +86,43 @@ func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError
 	}
 
 }
-func (s *userService) InsertUser(userDto dto.UserDto) (dto.UserDto, e.ApiError) {
 
-	var user model.User
+func (s *userService) InsertUser(userDto dto.UserDto) (dto.TokenDto, e.ApiError) {
 
-	user.Id = userDto.Id
-	user.Nombre = userDto.Nombre
-	user.Apellido = userDto.Apellido
-	user.Email = userDto.Email
-	user.Password = userDto.Password
-	user.Tipo = userDto.Tipo
-	user.Dni = userDto.Dni
+	log.Debug(userDto) //para registrar el contenido de userDto
+	var user model.User = userCliente.GetUserByEmail(userDto.Email)
 
-	user = userCliente.InsertUser(user)
+	var tokenDto dto.TokenDto
 
-	userDto.Id = user.Id
+	if user.Id == 0 { //el usuario no esta registrado y puedo crear uno nuevo
 
-	return userDto, nil
+		//pasamos password como slice de bytes
+		//hashea con md5.sum
+		var pswMd5 = md5.Sum([]byte(userDto.Password))
+		//convertir a cadena hexadecimal
+		pswMd5String := hex.EncodeToString(pswMd5[:])
+		//se firma el token para verificar autenticidad
+		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+			"id_user": user.Id,
+		})
+		tokenString, _ := token.SignedString(jwtKey)
+		tokenDto.Token = tokenString
+		tokenDto.IdUser = user.Id
+
+		user.Id = userDto.Id
+		user.Nombre = userDto.Nombre
+		user.Apellido = userDto.Apellido
+		user.Email = userDto.Email
+		user.Password = pswMd5String
+		user.Tipo = userDto.Tipo
+		user.Dni = userDto.Dni
+
+		user = userCliente.InsertUser(user)
+
+		return tokenDto, nil
+
+	} else { //el usuario ya existe
+		return tokenDto, e.NewBadRequestApiError("usuario ya existe")
+	}
+
 }
