@@ -54,6 +54,7 @@ func (s *reservaService) InsertReserva(reservaDto dto.ReservaDto) (dto.ReservaDt
 	reservaResponseDto.Id = reserva.Id
 	reservaResponseDto.Fecha_desde = reserva.Fecha_desde
 	reservaResponseDto.Fecha_hasta = reserva.Fecha_hasta
+	reservaResponseDto.Precio_total = reserva.Precio_total
 	reservaResponseDto.IdUser = reserva.IdUser
 	reservaResponseDto.IdHotel = reserva.IdHotel
 
