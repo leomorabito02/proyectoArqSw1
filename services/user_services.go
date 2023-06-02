@@ -20,6 +20,7 @@ type userService struct{}
 type userServiceInterface interface {
 	GetUserById(id int) (dto.UserDto, e.ApiError)
 	LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError)
+	InsertUser(userDto dto.UserDto) (dto.UserDto, e.ApiError)
 }
 
 var (
@@ -84,4 +85,22 @@ func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError
 		return tokenDto, e.NewBadRequestApiError("contraseña incorrecta")
 	}
 
+}
+func (s *userService) InsertUser(userDto dto.UserDto) (dto.UserDto, e.ApiError) {
+
+	var user model.User
+
+	user.Id = userDto.Id
+	user.Nombre = userDto.Nombre
+	user.Apellido = userDto.Apellido
+	user.Email = userDto.Email
+	user.Password = userDto.Password
+	user.Tipo = userDto.Tipo
+	user.Dni = userDto.Dni
+
+	user = userCliente.InsertUser(user)
+
+	userDto.Id = user.Id
+
+	return userDto, nil
 }

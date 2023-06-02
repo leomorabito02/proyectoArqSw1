@@ -45,3 +45,26 @@ func UserLogin(c *gin.Context) {
 	c.JSON(http.StatusCreated, tokenDto)
 
 }
+
+/*
+func InsertUser(c *gin.Context) {
+	var userDto dto.UserDto
+	err := c.BindJSON(&userDto)
+
+	// Error Parsing json param
+	if err != nil {
+		log.Error(err.Error())
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
+
+	userDto, er := service.UserService.InsertUser(userDto)
+	// Error del Insert
+	if er != nil {
+		c.JSON(er.Status(), er)
+		return
+	}
+
+	c.JSON(http.StatusCreated, userDto)
+}
+*/
