@@ -1,16 +1,13 @@
 package services
 
 import (
-	"repo/dto"
-	"repo/model"
-	e "repo/utils/errors"
-
-	userCliente "repo/clients/user"
-
 	"crypto/md5"
 	"encoding/hex"
-
 	"github.com/dgrijalva/jwt-go"
+	userCliente "repo/clients/user"
+	dto2 "repo/dto"
+	"repo/model"
+	e "repo/utils/errors"
 
 	log "github.com/sirupsen/logrus"
 )
@@ -18,9 +15,9 @@ import (
 type userService struct{}
 
 type userServiceInterface interface {
-	GetUserById(id int) (dto.UserDto, e.ApiError)
-	LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError)
-	InsertUser(userDto dto.UserDto) (dto.TokenDto, e.ApiError)
+	GetUserById(id int) (dto2.UserDto, e.ApiError)
+	LoginUser(loginDto dto2.LoginDto) (dto2.TokenDto, e.ApiError)
+	InsertUser(userDto dto2.UserDto) (dto2.TokenDto, e.ApiError)
 }
 
 var (
@@ -31,10 +28,10 @@ func init() {
 	UserService = &userService{}
 }
 
-func (s *userService) GetUserById(id int) (dto.UserDto, e.ApiError) {
+func (s *userService) GetUserById(id int) (dto2.UserDto, e.ApiError) {
 
 	var user model.User = userCliente.GetUserById(id)
-	var userDto dto.UserDto
+	var userDto dto2.UserDto
 
 	if user.Id == 0 {
 		return userDto, e.NewBadRequestApiError("user not found")
@@ -54,12 +51,12 @@ func (s *userService) GetUserById(id int) (dto.UserDto, e.ApiError) {
 
 var jwtKey = []byte("secret_key")
 
-func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError) {
+func (s *userService) LoginUser(loginDto dto2.LoginDto) (dto2.TokenDto, e.ApiError) {
 
 	log.Debug(loginDto) //para registrar el contenido de loginDto
 	var user model.User = userCliente.GetUserByEmail(loginDto.Email)
 
-	var tokenDto dto.TokenDto
+	var tokenDto dto2.TokenDto
 
 	if user.Id == 0 {
 		return tokenDto, e.NewBadRequestApiError("user not found")
@@ -87,12 +84,12 @@ func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError
 
 }
 
-func (s *userService) InsertUser(userDto dto.UserDto) (dto.TokenDto, e.ApiError) {
+func (s *userService) InsertUser(userDto dto2.UserDto) (dto2.TokenDto, e.ApiError) {
 
 	log.Debug(userDto) //para registrar el contenido de userDto
 	var user model.User = userCliente.GetUserByEmail(userDto.Email)
 
-	var tokenDto dto.TokenDto
+	var tokenDto dto2.TokenDto
 
 	if user.Id == 0 { //el usuario no esta registrado y puedo crear uno nuevo
 

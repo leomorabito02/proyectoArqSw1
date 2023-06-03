@@ -1,16 +1,13 @@
 package services
 
 import (
+	"github.com/dgrijalva/jwt-go"
+	hotelCliente "repo/clients/hotel"
+	reservaCliente "repo/clients/reserva"
 	"repo/dto"
-	"repo/model"
+	model2 "repo/model"
 	e "repo/utils/errors"
 	"time"
-
-	reservaCliente "repo/clients/reserva"
-
-	hotelCliente "repo/clients/hotel"
-
-	"github.com/dgrijalva/jwt-go"
 )
 
 type reservaService struct{}
@@ -30,7 +27,7 @@ func init() {
 
 func (s *reservaService) InsertReserva(reservaDto dto.ReservaDto) (dto.ReservaDto, e.ApiError) {
 
-	var reserva model.Reserva
+	var reserva model2.Reserva
 
 	reserva.Id = reservaDto.Id
 	reserva.Fecha_desde = reservaDto.Fecha_desde
@@ -38,7 +35,7 @@ func (s *reservaService) InsertReserva(reservaDto dto.ReservaDto) (dto.ReservaDt
 	reserva.IdUser = reservaDto.IdUser
 	reserva.IdHotel = reservaDto.IdHotel
 
-	var hotel model.Hotel
+	var hotel model2.Hotel
 	var diferencia time.Duration
 	var cantDias int32
 
@@ -94,7 +91,7 @@ func (s *reservaService) GetReservasByIdUser(token string) (dto.ReservasDto, e.A
 		return nil, e.NewUnauthorizedApiError("Unauthorized")
 	}
 	var IdUserX int = int(idUser)
-	var reservas model.Reservas = reservaCliente.GetReservasByIdUser(IdUserX)
+	var reservas model2.Reservas = reservaCliente.GetReservasByIdUser(IdUserX)
 	var reservasDto dto.ReservasDto
 
 	if len(reservas) == 0 {

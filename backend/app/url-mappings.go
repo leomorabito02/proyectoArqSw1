@@ -1,11 +1,10 @@
 package app
 
 import (
+	log "github.com/sirupsen/logrus"
 	hotelController "repo/controllers/hotel"
 	reservaController "repo/controllers/reserva"
 	userController "repo/controllers/user"
-
-	log "github.com/sirupsen/logrus"
 )
 
 // para el final dockerizar hacer git pull y docker compose para levantar todo de una

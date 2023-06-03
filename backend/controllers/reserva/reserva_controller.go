@@ -1,12 +1,11 @@
 package reservaController
 
 import (
+	"github.com/gin-gonic/gin"
+	log "github.com/sirupsen/logrus"
 	"net/http"
 	"repo/dto"
 	service "repo/services"
-
-	"github.com/gin-gonic/gin"
-	log "github.com/sirupsen/logrus"
 )
 
 func ReservaInsert(c *gin.Context) {

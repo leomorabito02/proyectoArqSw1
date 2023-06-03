@@ -2,7 +2,7 @@ package userController
 
 import (
 	"net/http"
-	"repo/dto"
+	dto2 "repo/dto"
 	service "repo/services"
 	"strconv"
 
@@ -14,7 +14,7 @@ import (
 func GetUserById(c *gin.Context) {
 	log.Debug("ID de usuario a cargar: " + c.Param("id"))
 	id, _ := strconv.Atoi(c.Param("id"))
-	var userDto dto.UserDto
+	var userDto dto2.UserDto
 
 	userDto, err := service.UserService.GetUserById(id)
 
@@ -28,7 +28,7 @@ func GetUserById(c *gin.Context) {
 //login
 
 func UserLogin(c *gin.Context) {
-	var loginDto dto.LoginDto
+	var loginDto dto2.LoginDto
 	err := c.BindJSON(&loginDto)
 
 	if err != nil {
@@ -47,7 +47,7 @@ func UserLogin(c *gin.Context) {
 }
 
 func InsertUser(c *gin.Context) {
-	var userDto dto.UserDto
+	var userDto dto2.UserDto
 	err := c.BindJSON(&userDto)
 
 	// Error Parsing json param

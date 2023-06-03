@@ -1,15 +1,13 @@
 package db
 
 import (
-	"repo/model"
-
-	hotelClient "repo/clients/hotel"
-	reservaClient "repo/clients/reserva"
-	userClient "repo/clients/user"
-
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	log "github.com/sirupsen/logrus"
+	hotelClient "repo/clients/hotel"
+	reservaClient "repo/clients/reserva"
+	userClient "repo/clients/user"
+	model2 "repo/model"
 )
 
 var (
@@ -43,9 +41,9 @@ func init() {
 
 func StartDbEngine() {
 	// We need to migrate all classes model.
-	db.AutoMigrate(&model.User{})
-	db.AutoMigrate(&model.Reserva{})
-	db.AutoMigrate(&model.Hotel{})
+	db.AutoMigrate(&model2.User{})
+	db.AutoMigrate(&model2.Reserva{})
+	db.AutoMigrate(&model2.Hotel{})
 
 	log.Info("Finishing Migration Database Tables :)")
 }

@@ -1,10 +1,9 @@
 package user
 
 import (
-	"repo/model"
-
 	"github.com/jinzhu/gorm"
 	log "github.com/sirupsen/logrus"
+	"repo/model"
 )
 
 var Db *gorm.DB
