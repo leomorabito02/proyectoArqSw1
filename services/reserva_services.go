@@ -43,22 +43,32 @@ func (s *reservaService) InsertReserva(reservaDto dto.ReservaDto) (dto.ReservaDt
 	var cantDias int32
 
 	hotel = hotelCliente.GetHotelById(reserva.IdHotel)
-	diferencia = reserva.Fecha_hasta.Sub(reserva.Fecha_desde)
-	cantDias = int32(diferencia.Hours() / 24)
-	reserva.Precio_total = float32(int32(hotel.Precio) * cantDias) //a super chequear
 
-	reserva = reservaCliente.InsertReserva(reserva)
+	var habitacionesDisponibles int
+	habitacionesDisponibles = hotelCliente.GetHabitacionesDisponibles(reserva.IdHotel, hotel.Cant_habitaciones, reserva.Fecha_desde, reserva.Fecha_hasta)
 
-	var reservaResponseDto dto.ReservaDto
+	if habitacionesDisponibles == 0 {
+		var reservaResponseDto dto.ReservaDto
 
-	reservaResponseDto.Id = reserva.Id
-	reservaResponseDto.Fecha_desde = reserva.Fecha_desde
-	reservaResponseDto.Fecha_hasta = reserva.Fecha_hasta
-	reservaResponseDto.Precio_total = reserva.Precio_total
-	reservaResponseDto.IdUser = reserva.IdUser
-	reservaResponseDto.IdHotel = reserva.IdHotel
+		return reservaResponseDto, e.NewBadRequestApiError("No hay habitaciones disponibles")
+	} else {
 
-	return reservaResponseDto, nil
+		diferencia = reserva.Fecha_hasta.Sub(reserva.Fecha_desde)
+		cantDias = int32(diferencia.Hours() / 24)
+		reserva.Precio_total = float32(int32(hotel.Precio) * cantDias) //a super chequear
+		reserva = reservaCliente.InsertReserva(reserva)
+
+		var reservaResponseDto dto.ReservaDto
+
+		reservaResponseDto.Id = reserva.Id
+		reservaResponseDto.Fecha_desde = reserva.Fecha_desde
+		reservaResponseDto.Fecha_hasta = reserva.Fecha_hasta
+		reservaResponseDto.Precio_total = reserva.Precio_total
+		reservaResponseDto.IdUser = reserva.IdUser
+		reservaResponseDto.IdHotel = reserva.IdHotel
+
+		return reservaResponseDto, nil
+	}
 }
 
 func (s *reservaService) GetReservasByIdUser(token string) (dto.ReservasDto, e.ApiError) {
