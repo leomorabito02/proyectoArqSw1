@@ -12,3 +12,26 @@ p{
     color: black;
     text-align: center;
 }
+#body{
+    align-Items: center;
+    background-Color: #CBE4DE;
+    min-Height: 100vh
+}
+#h1Login{
+    text-Align: center;
+    color:#0E8388;
+}
+#formLogin{
+    display: grid;
+    flex-Direction: column;
+    align-Items: center;
+}
+#inputLogin{
+    margin-Bottom: 10px;
+    padding: 5px;
+}
+#botonLogin{
+    background-Color: #2E4F4F;
+    color: #ffffff;
+    padding: 8px 16px;
+}

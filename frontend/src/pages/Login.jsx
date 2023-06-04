@@ -1,39 +1,43 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
+
+const navigate = useNavigate();
 const Login = () =>{
-
-    let [email, setEmail] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const register = () =>{
+        navigate("/Register");
+    };
     const handleSubmit = (e) => {
+
 
         if(email === '' || password === '' ){
 
         }
-        console.log('Email:', email);
-        console.log('Password:', password);
+
     };
 
     return (
-        <div style={{ alignItems: 'center', backgroundColor: '#CBE4DE', minHeight: '100vh' }}>
-            <h1 style={{ textAlign: 'center', color:'#0E8388'}}>Iniciar sesión:</h1>
-            <form onSubmit={handleSubmit} style={{ display: 'grid', flexDirection: 'column', alignItems: 'center' }}>
-                <input
+        <div id="body">
+            <h1 id="h1Login">Iniciar sesión:</h1>
+            <form id="formLogin" onSubmit={handleSubmit} >
+                <input id={"inputLogin"}
                     type="email"
                     placeholder="Correo electrónico"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    style={{ marginBottom: '10px', padding: '5px' }}
                 />
-                <input
+                <input id={"inputLogin"}
                     type="password"
                     placeholder="Contraseña"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    style={{ marginBottom: '10px', padding: '5px' }}
+
                 />
-                <button type="submit" style={{ backgroundColor: '#2E4F4F', color: '#FFF', padding: '8px 16px' }}>Iniciar sesión</button>
+                <button id="botonLogin" type="submit">Iniciar sesión</button>
                 <br/>
-                <button type="submit" style={{ backgroundColor: '#2E4F4F', color: '#FFF', padding: '8px 16px' }}>Registrarse</button>
+                <button id="botonLogin" onClick={register}>Registrarse</button>
             </form>
         </div>
     );
