@@ -30,16 +30,15 @@ const Login = () =>{
                     // El usuario está en la base de datos
                     console.log('Usuario válido');
                     navigate("/home")
+
                 } else {
                     // El usuario no está en la base de datos o hay un error en el servidor
                     console.log('Usuario inválido');
-                    // Mostrar un mensaje de error o realizar acciones adicionales
                 }
             } catch (error) {
                 console.log('Error al realizar la solicitud al backend:', error);
             }
         }
-
 
     };
 
