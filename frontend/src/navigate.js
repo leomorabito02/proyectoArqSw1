@@ -3,22 +3,22 @@ import {Login} from "pages/Login.jsx"
 import {Register} from "pages/Register.jsx"
 
 const Home = lazy(() => import("pages/Home.jsx"));
-
+//estas son las rutas de las paginas de nuestro programa
 export const navigation = [
     {
         id: 0,
-        path: "/",
+        path: "/",// el login es la raiz porque es la principal, si no pasa el login, no debe entrar al resto
         Element: Login,
     },
     {
         id: 1,
-        path: "/home",
-        Element: Home,
+        path: "/login",
+        Element: Login,
     },
     {
         id: 2,
-        path: "/login",
-        Element: Login,
+        path: "/home",
+        Element: Home,
     },
     {
         id: 3,

@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, } from "react-router-dom";
 import './../App.css'
 
-
+//parte funcional
 const Login = () =>{
-    const navigate = useNavigate();
-    const [email, setEmail] = useState('');
+    const navigate = useNavigate(); //permite la navegación entre paginasd con las rutas
+    const [email, setEmail] = useState(''); //se inicializan las variables vacias
     const [password, setPassword] = useState('');
-    const register = () =>{
+    const register = () =>{ // funbcion que te redirige a  register
       navigate("/register");
     };
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => { //recibe los datos del formulario
         e.preventDefault(); // para que no recarga la página
         if (email === '') {
             document.getElementById("inputEmailLogin").style.borderColor = 'red';
@@ -19,14 +19,14 @@ const Login = () =>{
             document.getElementById("inputPasswordLogin").style.borderColor = 'red';
         }
         else{
-            try {
+            try {   //envía la respuesta al back (postaman basicamente)
                 const response = await fetch('http://localhost:8080/login', {
                     method: 'POST', headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({email, password}),
                 });
-                if (response.ok) {
+                if (response.ok) {// si el usuario existe
                     // El usuario está en la base de datos
                     console.log('Usuario válido');
                     navigate("/home")
@@ -41,7 +41,7 @@ const Login = () =>{
         }
 
     };
-
+//parte visible
     return (
         <div id="body">
             <h1 id="h1Login">Iniciar sesión:</h1>
