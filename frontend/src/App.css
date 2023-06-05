@@ -7,5 +7,25 @@ html,body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-Items: center;
+  min-Height: 100vh
 
+}
+#h1Login{
+  text-Align: center;
+  color:#0E8388;
+}
+#formLogin{
+  display: grid;
+  flex-Direction: column;
+  align-Items: center;
+}
+#inputEmailLogin, #inpunPasswordLogin{
+  margin-Bottom: 10px;
+  padding: 5px;
+}
+#botonLogin{
+  background-Color: #2E4F4F;
+  color: #ffffff;
+  padding: 8px 16px;
 }
