@@ -24,7 +24,7 @@ html,body {
   margin-Bottom: 10px;
   padding: 5px;
 }
-#botonLogin{
+#botonLogin, #botonRegistrarse{
   background-Color: #2E4F4F;
   color: #ffffff;
   padding: 8px 16px;

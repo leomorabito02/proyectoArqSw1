@@ -8,7 +8,7 @@ export const navigation = [
     {
         id: 0,
         path: "/",
-        Element: Home,
+        Element: Login,
     },
     {
         id: 1,
