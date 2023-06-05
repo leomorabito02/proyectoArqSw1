@@ -2,7 +2,7 @@ import { lazy } from "react";
 import {Login} from "pages/Login.jsx"
 import {Register} from "pages/Register.jsx"
 
-const Home = lazy(() => import("pages/Home.jsx")
+const Home = lazy(() => import("pages/Home.jsx"));
 
 export const navigation = [
     {
