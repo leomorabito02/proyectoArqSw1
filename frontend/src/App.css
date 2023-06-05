@@ -1,0 +1,54 @@
+html,body {
+  background-color: #CBE4DE;
+  height: auto;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-Items: center;
+  min-Height: 100vh
+
+}
+
+/*estilos del login*/
+#h1Login{
+  text-Align: center;
+  color:#0E8388;
+}
+#formLogin{
+  display: grid;
+  flex-Direction: column;
+  align-Items: center;
+}
+#inputEmailLogin, #inpuntPasswordLogin{
+  margin-Bottom: 10px;
+  padding: 5px;
+}
+#botonLogin, #botonRegistrarse{
+  background-Color: #2E4F4F;
+  color: #ffffff;
+  padding: 8px 16px;
+}
+
+/*estilos del register*/
+#h1Register{
+  text-Align: center;
+  color:#0E8388;
+}
+#formRegister{
+  display: grid;
+  flex-Direction: column;
+  align-Items: center;
+}
+#inputNombreRegister,#inputApellidoRegister,#inputDniRegister,
+#inputEmailRegister, #inpuntPasswordRegister{
+  margin-Bottom: 10px;
+  padding: 5px;
+}
+#botonRegistrarse{
+  background-Color: #2E4F4F;
+  color: #ffffff;
+  padding: 8px 16px;
+}
