@@ -7,7 +7,7 @@ const Login = () =>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const register = () =>{
-        navigate("/Register");
+      navigate("/Register");
     };
     const handleSubmit = (e) => {
 
