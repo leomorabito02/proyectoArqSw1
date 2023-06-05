@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, } from "react-router-dom";
 import './../App.css'
-
-//creada solo para testear
-
 
 //parte funcional
 const Register = () =>{
@@ -17,6 +14,10 @@ const Register = () =>{
     const register = () =>{ // funbcion que te redirige a  home
       navigate("/home");
     };
+    const register1 = () =>{ // funbcion que te redirige a  login
+        navigate("/login");
+    };
+
     const handleSubmit = async (e) => { //recibe los datos del formulario
         e.preventDefault(); // para que no recarga la página
         if (nombre === '') {
@@ -36,7 +37,7 @@ const Register = () =>{
         }
         else{
             try {   //envía la respuesta al back (postaman basicamente)
-                const response = await fetch('http://localhost:8080/login/register', {
+                const response = await fetch('http://localhost:8080/register', {
                     method: 'POST', headers: {
                         'Content-Type': 'application/json',
                     },
@@ -62,7 +63,7 @@ const Register = () =>{
     return(
         <div>
             <div id="body">
-            <h1 id="h1Register">Resgistrarse</h1>
+            <h2 id="h1Register">Registrarse</h2>
             <form id="formRegister" onSubmit={handleSubmit} >
                 <input id={"inputNombreRegister"}
                     type="nombre"
@@ -93,14 +94,13 @@ const Register = () =>{
                     placeholder="Contraseña"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-
                 />
                 <br/>
-                <button id="botonRegistrarse" onClick={register}>Registrarse</button>
+                <button id="botonRegistrarse" type="submit" onClick={register}>Registrarse</button>
                 
             </form>
             <br/>
-            <button id="botonRegistrarse" onClick={register}>Atras</button>
+            <button id="botonRegistrarse" onClick={register1}>Atras</button>
         </div>
         </div>
         
