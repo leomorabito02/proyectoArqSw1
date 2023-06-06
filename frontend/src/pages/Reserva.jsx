@@ -9,10 +9,10 @@ const Reserva = () => {
     e.preventDefault();
     console.log(startDate)
     console.log(endDate)
-    if (selectedStartDate === null) {
-      setErrorMessage('Seleccione fecha de inicio');
-    } else if (selectedEndDate === null) {
-      setErrorMessage('Seleccione fecha de salida');
+    if (startDate === null) {
+      console.log('Seleccione fecha de inicio');
+    } else if (endDate === null) {
+      console.log('Seleccione fecha de salida');
     } else {
       try {
         const startDateString = startDate.toISOString(); // Serializar fecha de inicio
