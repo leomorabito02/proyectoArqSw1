@@ -49,7 +49,7 @@ func GetHabitacionesDisponibles(hotelID int, totalHabitaciones int, fecha_desde 
 
 	var cantReservas int
 	Db.Model(&model.Hotel{}).
-		Joins("join reservas on hotels.id = reservas.id_hotel").
+		Joins("join reservas on hotels.id = reservas.hotel_id").
 		Where("hotels.id= ? AND reservas.fecha_desde >= ? AND reservas.fecha_hasta <= ?", hotelID, fecha_desde, fecha_hasta).
 		Count(&cantReservas)
 
