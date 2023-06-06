@@ -11,6 +11,11 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+func GetUserByEmail(c *gin.Context) {
+	var userDto dto2.UserDto
+	c.JSON(http.StatusOK, userDto)
+
+}
 func GetUserById(c *gin.Context) {
 	log.Debug("ID de usuario a cargar: " + c.Param("id"))
 	id, _ := strconv.Atoi(c.Param("id"))
