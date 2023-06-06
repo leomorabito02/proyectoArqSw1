@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import {Login} from "pages/Login.jsx"
 import {Register} from "pages/Register.jsx"
+import {Home} from "pages/Home.jsx"
 
 const Home = lazy(() => import("pages/Home.jsx"));
 //estas son las rutas de las paginas de nuestro programa

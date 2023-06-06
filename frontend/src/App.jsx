@@ -8,19 +8,19 @@ import Register from "./pages/Register.jsx";
 
 
 const App = () => {
-    return (
-        <div>
-            <Router>
-                <Header />
-                 <Routes>
-                        <Route path="/" element={<Login />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                </Routes>
-                <Footer />
-            </Router>
-        </div>
-    );
+  return (
+      <div>
+          <Router>
+              <Header />
+               <Routes>
+                      <Route path="/" element={<Login />} />
+                      <Route path="/login" element={<Login />} />
+                      <Route path="/register" element={<Register />} />
+              </Routes>
+              <Footer />
+          </Router>
+      </div>
+  );
 };
 
-export default App;
+export default App

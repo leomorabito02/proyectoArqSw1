@@ -44,7 +44,7 @@ const Login = () =>{
 //parte visible
     return (
         <div id="body">
-            <h1 id="h1Login">Iniciar sesión:</h1>
+            <h1 id="h1Login">Iniciar sesión</h1>
             <form id="formLogin" onSubmit={handleSubmit} >
                 <input id={"inputEmailLogin"}
                     type="email"
@@ -59,6 +59,7 @@ const Login = () =>{
                     onChange={(e) => setPassword(e.target.value)}
 
                 />
+                <br/>
                 <button id="botonLogin" type="submit">Iniciar sesión</button>
                 <br/>
                 <button id="botonRegistrarse" onClick={register}>Registrarse</button>
