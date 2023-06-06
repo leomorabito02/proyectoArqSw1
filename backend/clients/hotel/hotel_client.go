@@ -2,8 +2,8 @@ package hotel
 
 //ORM traductor
 import (
-	"github.com/jinzhu/gorm"
 	log "github.com/sirupsen/logrus"
+	"gorm.io/gorm"
 	"repo/model"
 	"time"
 )
@@ -31,29 +31,42 @@ func GetHoteles() model.Hoteles {
 /*
 func GetHabitacionesDisponibles(hotelID int, totalHabitaciones int, fecha_desde time.Time, fecha_hasta time.Time) int {
 
-	var cantReservas int
-	Db.Model(&model.Hotel{}).
-		Joins("join reservas on hoteles.id = reservas.hotel_id").
-		Where("hoteles.id= ?", hotelID).
-		Where("reservas.fecha_desde >= ?", fecha_desde).
-		Where("reservas.fecha_hasta <= ?", fecha_hasta).
-		Count(&cantReservas)
+		var cantReservas int
+		Db.Model(&model.Hotel{}).
+			Joins("join reservas on hoteles.id = reservas.hotel_id").
+			Where("hoteles.id= ?", hotelID).
+			Where("reservas.fecha_desde >= ?", fecha_desde).
+			Where("reservas.fecha_hasta <= ?", fecha_hasta).
+			Count(&cantReservas)
 
-	//cantidadDeReservasEnLaFechaSeleecionada = "SELECT COUNT(*) from hotels h JOIN reservas r ON h.id = r.hotel_id WHERE h.hotel_id = hotelID AND r.fecha_desde <= fecha_desde AND r.fecha_hasta >= fechaHasta"
+		//cantidadDeReservasEnLaFechaSeleecionada = "SELECT COUNT(*) from hotels h JOIN reservas r ON h.id = r.hotel_id WHERE h.hotel_id = hotelID AND r.fecha_desde <= fecha_desde AND r.fecha_hasta >= fechaHasta"
 
-	return totalHabitaciones - cantReservas
-}
+		return totalHabitaciones - cantReservas
+	}
 */
+type reservas struct {
+	Cantidad int `gorm:"type:int64"`
+}
 
 func GetHabitacionesDisponibles(hotelID int, totalHabitaciones int, fecha_desde time.Time, fecha_hasta time.Time) int {
 
-	var cantReservas int
-	Db.Model(&model.Hotel{}).
-		Joins("join reservas on hotels.id = reservas.hotel_id").
-		Where("hotels.id= ? AND reservas.fecha_desde >= ? AND reservas.fecha_hasta <= ?", hotelID, fecha_desde, fecha_hasta).
-		Count(&cantReservas)
-
+	var cantidad int64
+	log.Debug("FECHA DESDE: ", fecha_desde)
+	log.Debug("FECHA HASTA: ", fecha_hasta)
+	from := fecha_desde.Format(time.DateOnly)
+	to := fecha_hasta.Format(time.DateOnly)
+	txn := Db.Model(&model.Reservas{}).
+		Where("id_hotel= ?", hotelID).
+		Where(Db.
+			Where(Db.Where(Db.Where("fecha_desde <= ?", from).Where("? <= fecha_hasta", from))).
+			Or(Db.Where(Db.Where("fecha_desde <= ?", to).Where("? <= fecha_hasta", to))).
+			Or(Db.Where(Db.Where("? <= fecha_desde", from).Where("fecha_hasta <= ?", to)))).
+		Count(&cantidad)
+	if txn.Error != nil {
+		log.Error(txn.Error)
+		return 0
+	}
+	log.Debug("CANTIDAD ", cantidad)
 	//cantidadDeReservasEnLaFechaSeleecionada = "SELECT COUNT(*) from hotels h JOIN reservas r ON h.id = r.hotel_id WHERE h.hotel_id = hotelID AND r.fecha_desde <= fecha_desde AND r.fecha_hasta >= fechaHasta"
-
-	return totalHabitaciones - cantReservas
+	return totalHabitaciones - int(cantidad)
 }

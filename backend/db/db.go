@@ -2,8 +2,10 @@ package db
 
 import (
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/jinzhu/gorm"
 	log "github.com/sirupsen/logrus"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 	hotelClient "repo/clients/hotel"
 	reservaClient "repo/clients/reserva"
 	userClient "repo/clients/user"
@@ -24,7 +26,10 @@ func init() {
 	DBHost := "localhost"
 	// ------------------------
 
-	db, err = gorm.Open("mysql", DBUser+":"+DBPass+"@tcp("+DBHost+":3306)/"+DBName+"?charset=utf8&parseTime=True")
+	db, err = gorm.Open(mysql.Open(DBUser+":"+DBPass+"@tcp("+DBHost+":3306)/"+DBName+"?charset=utf8&parseTime=True"),
+		&gorm.Config{
+			Logger: logger.Default.LogMode(logger.Info),
+		})
 
 	if err != nil {
 		log.Info("Connection Failed to Open")

@@ -2,8 +2,8 @@ package reserva
 
 //ORM traductor
 import (
-	"github.com/jinzhu/gorm"
 	log "github.com/sirupsen/logrus"
+	"gorm.io/gorm"
 	"repo/model"
 )
 

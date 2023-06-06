@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import DateRangeComp from '../components/DateRangeComp';
 import {useNavigate, useParams} from 'react-router-dom';
 
@@ -12,22 +12,32 @@ const Reserva = () => {
   const back= () =>{ // funbcion que te redirige a  login
     navigate(-1); // "/home"
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (startDate === null) {
-      console.log('Seleccione fecha de inicio');
-    } else if (endDate === null) {
-      console.log('Seleccione fecha de salida');
-    } else {
+    let inputValue = e.target[0].value;
+    const splitValues = inputValue.split(' - ');
+    if (splitValues.length > 1) {
       try {
-        const startDateString = startDate.toISOString();
-        const endDateString = endDate.toISOString();
-        const response = await fetch(`http://localhost:8080/reserva/${id}`, {
+        const startDateString = splitValues[0];
+        const endDateString = splitValues[1];
+        let tempStartDate = startDateString.replace(/\//g, '-');
+        let tempEndDate = endDateString.replace(/\//g, '-');
+        tempStartDate += "T00:00:00-03:00";
+        tempEndDate += "T00:00:00-03:00";
+        setStartDate(tempStartDate);
+        setEndDate(tempEndDate);
+        const response = await fetch('http://localhost:8080/reserva', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ startDate: startDateString, endDate: endDateString }),
+          body: JSON.stringify({
+            fecha_desde: tempStartDate,
+            fecha_hasta: tempEndDate,
+            id_hotel: hotel.id,
+            id_user: Number(localStorage.getItem("user_id"))
+          }),
         });
         if (response.ok) {
           console.log('Se ha registrado su reserva');
