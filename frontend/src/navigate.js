@@ -1,8 +1,9 @@
 import { lazy } from "react";
-import {Login} from "pages/Login.jsx"
-import {Register} from "pages/Register.jsx"
-import {Home} from "pages/Home.jsx"
-import {Reserva} from "./pages/Reserva.jsx";
+import Login from "pages/Login.jsx"
+import Register from "pages/Register.jsx"
+import Home from "pages/Home.jsx"
+import Reserva from "./pages/Reserva.jsx";
+import id from "pages/Home.jsx";
 
 const Home = lazy(() => import("pages/Home.jsx"));
 //estas son las rutas de las paginas de nuestro programa
@@ -14,7 +15,7 @@ export const navigation = [
     },
     {
         id: 1,
-        path: "/login",
+        path: '/login',
         Element: Login,
     },
     {
@@ -29,7 +30,7 @@ export const navigation = [
     },
     {
         id: 4,
-        path: "/hotel/${id}",
+        path: `/hotel/'${id}`,
         Element:Reserva,
     },
     {
