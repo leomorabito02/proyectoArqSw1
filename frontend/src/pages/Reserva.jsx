@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import DateRangeComp from '../components/DateRangeComp';
-
+import './Home.jsx'
 const Reserva = () => {
   const [hotel, setHotel] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
