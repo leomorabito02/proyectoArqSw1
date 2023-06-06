@@ -4,7 +4,7 @@ import Reserva from './pages/Reserva';
 
 const App = () => {
   return (
-    <div style={{ backgroundColor: '#CBE4DE', display: 'flex', height: '100vh', paddingBottom:'50px'}}>
+    <div style={{ backgroundColor: '#CBE4DE', display: 'flex', marginRight:'30px', height: '100vh', paddingBottom:'50px'}}>
       <Reserva/>
     </div>
   );
