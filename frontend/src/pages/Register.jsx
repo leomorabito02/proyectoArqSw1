@@ -5,7 +5,6 @@ import './../App.css'
 //parte funcional
 const Register = () =>{
 
-    const navigate = useNavigate(); //permite la navegación entre paginasd con las rutas
     const [nombre, setNombre] = useState(''); //se inicializan las variables vacias
     const [apellido, setApellido] = useState('');
     const [dni, setDni] = useState('');

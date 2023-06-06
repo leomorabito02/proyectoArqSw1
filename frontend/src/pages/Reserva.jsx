@@ -10,7 +10,7 @@ const Reserva = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
   const back= () =>{ // funbcion que te redirige a  login
-    navigate("/home");
+    navigate(-1); // "/home"
   };
   const handleSubmit = async (e) => {
     e.preventDefault();

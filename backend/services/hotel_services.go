@@ -38,6 +38,10 @@ func (s *hotelService) GetHotelById(id int) (dto2.HotelDto, e.ApiError) {
 	hotelDto.Cant_habitaciones = hotel.Cant_habitaciones
 	hotelDto.Valoracion = hotel.Valoracion
 	hotelDto.Precio = hotel.Precio
+	hotelDto.Gym = hotel.Gym
+	hotelDto.Wifi = hotel.Wifi
+	hotelDto.Bide = hotel.Bide
+	hotelDto.Pileta = hotel.Pileta
 
 	return hotelDto, nil
 }
@@ -58,6 +62,10 @@ func (s *hotelService) GetHoteles() (dto2.HotelesDto, e.ApiError) {
 		hotelDto.Cant_habitaciones = hotel.Cant_habitaciones
 		hotelDto.Valoracion = hotel.Valoracion
 		hotelDto.Precio = hotel.Precio
+		hotelDto.Gym = hotel.Gym
+		hotelDto.Wifi = hotel.Wifi
+		hotelDto.Bide = hotel.Bide
+		hotelDto.Pileta = hotel.Pileta
 
 		hotelesDto = append(hotelesDto, hotelDto) //append guarda la suma de "hotel"
 	}
@@ -79,6 +87,10 @@ func (s *hotelService) GetHotelDisponibilidad(hotelID int, fecha_desde time.Time
 			Cant_habitaciones: hotel.Cant_habitaciones,
 			Valoracion:        hotel.Valoracion,
 			Precio:            hotel.Precio,
+			Gym:               hotel.Gym,
+			Wifi:              hotel.Wifi,
+			Bide:              hotel.Bide,
+			Pileta:            hotel.Pileta,
 		},
 	}, nil
 
