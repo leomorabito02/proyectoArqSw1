@@ -1,7 +1,13 @@
+
 import React, { useEffect, useState } from 'react';
+
 
 const Home = () => {
   const [hoteles, setHoteles] = useState([]);
+
+  const selectHotels = () => {
+    navigate('/hotel/${id}');
+  };
 
   useEffect(() => {
     // Realizar la solicitud al backend para obtener la lista de hoteles
@@ -32,7 +38,7 @@ const Home = () => {
                 <p style={{ color: '#2C3333' }}>Estrellas: {hotel.valoracion}</p>
                 <p style={{ color: '#2C3333', marginRight: 'auto' }}>Precio por noche: ${hotel.precio}</p>
               </div>
-              <button style={{ marginRight: 'auto', backgroundColor:'#2E4F4F' }}>Ver</button>
+              <button style={{ marginRight: 'auto', backgroundColor:'#2E4F4F' }} onClick={selectHotels}>Ver</button>
             </div>
           ))}
         </div>
@@ -44,4 +50,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home; 
