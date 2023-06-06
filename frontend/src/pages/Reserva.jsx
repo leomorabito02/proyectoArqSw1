@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import DateRangeComp from '../components/DateRangeComp';
-import { useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 
 const Reserva = () => {
   const { id } = useParams();
@@ -8,7 +8,10 @@ const Reserva = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
-
+  const navigate = useNavigate();
+  const back= () =>{ // funbcion que te redirige a  login
+    navigate("/home");
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (startDate === null) {
@@ -37,12 +40,15 @@ const Reserva = () => {
     }
   };
 
+
+
   useEffect(() => {
     const fetchHotel = async () => {
       try {
         const response = await fetch(`http://localhost:8080/hotel/${id}`);
         const data = await response.json();
         setHotel(data);
+        //console.log(data)
       } catch (error) {
         console.log('Error al obtener el hotel:', error);
       }
@@ -60,6 +66,11 @@ const Reserva = () => {
                 <p style={{ textAlign: 'left', color: '#2C3333' }}>Estrellas: {hotel.valoracion}</p>
                 <p style={{ textAlign: 'left', color: '#2C3333', maxWidth: '80%' }}>Descripcion: {hotel.descripcion}</p>
                 <p style={{ textAlign: 'left', color: '#2C3333' }}>Precio por noche: ${hotel.precio}</p>
+                <p style={{ textAlign: 'left', color: '#2C3333' }}> Gimnasio: {hotel.gym ? 'Sí' : 'No'} </p>
+                <p style={{ textAlign: 'left', color: '#2C3333' }}> WIFI: {hotel.wifi ? 'Sí' : 'No'} </p>
+                <p style={{ textAlign: 'left', color: '#2C3333' }}> Estacionamiento: {hotel.estacionamiento ? 'Sí' : 'No'} </p>
+                <p style={{ textAlign: 'left', color: '#2C3333' }}> Bide: {hotel.bide ? 'Sí' : 'No'} </p>
+                <p style={{ textAlign: 'left', color: '#2C3333' }}> Pileta: {hotel.pileta ? 'Sí' : 'No'} </p>
               </div>
               <div style={{ alignItems: 'right', maxWidth: '50%', marginTop: '0px' }}>
                 <h3 style={{ textAlign: 'left', color: '#0E8388' }}>Seleccione check-in y check-out:</h3>
@@ -73,6 +84,7 @@ const Reserva = () => {
         ) : (
             <p>No se encontró el hotel</p>
         )}
+        <button id="botonAtras" onClick={back}>Atras</button>
       </div>
   );
 };
