@@ -7,22 +7,22 @@ const Reserva = () => {
 
   const handleSubmit = async (e, startDate, endDate) => {
     e.preventDefault();
-    console.log(selectedStartDate)
-    console.log(selectedEndDate)
+    console.log(startDate)
+    console.log(endDate)
     if (selectedStartDate === null) {
       setErrorMessage('Seleccione fecha de inicio');
     } else if (selectedEndDate === null) {
       setErrorMessage('Seleccione fecha de salida');
     } else {
       try {
-        const startDateString = selectedStartDate.toISOString(); // Serializar fecha de inicio
-        const endDateString = selectedEndDate.toISOString(); // Serializar fecha de salida
+        const startDateString = startDate.toISOString(); // Serializar fecha de inicio
+        const endDateString = endDate.toISOString(); // Serializar fecha de salida
         const response = await fetch('http://localhost:8080/reserva', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ selectedStartDate, selectedEndDate }),
+          body: JSON.stringify({ startDate, endDate }),
         });
         if (response.ok) {
           console.log('Se ha registrado su reserva');
