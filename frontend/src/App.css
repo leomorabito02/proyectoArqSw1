@@ -9,113 +9,85 @@ html,body {
   min-Height: 100vh
 }
 
-/*estilos del login*/
+/*ESTILOS DEL LOGIN*/
 #h1Login{
   text-Align: center;
   color:#0E8388;
 }
+#formLogin{ 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 #formLogin{
+  text-align: center;
   display: grid;
-  flex-Direction: column;
   align-Items: center;
-}
-#inputEmailLogin, #inpuntPasswordLogin{
-  margin-Bottom: 10px;
-  padding: 5px;
-}
-#botonLogin, #botonRegistrarse{
-  background-Color: #2E4F4F;
-  color: #ffffff;
-  padding: 8px 16px;
-}
-
-/*estilos del register*/
-#h1Register{
-  text-Align: center;
-  color:#0E8388;
-}
-#formRegister{
-  display: grid;
-  background-color: #2C3333;
+  background-color: #424242;
   padding: 2rem;
+  border-radius: 40px;
+  width: 30%;
+  padding-top: 30px;
+  box-shadow: 5px 5px 5px 5px rgb(104, 101, 101);
 }
-#inputNombreRegister,#inputApellidoRegister,#inputDniRegister,
-#inputEmailRegister,#inputPasswordRegister{
+#inputEmailLogin,#inputPasswordLogin{
   margin-Bottom: 10px;
-  padding: 5px;
-  background-color: #ffffff;
-  border: 1px solid
+  padding: 15px;
+  background-color: #424242;
+  border: 1px solid;
+  border-radius: 15px;
+  font-size: 15px;
 }
-
-#botonRegistrarse{
+#botonLogin{
   background-Color: #0E8388;
   color: #ffffff;
   padding: 8px 16px;
 }
 
 
-/*
-.app {
-  font-family: sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 20px;
-  height: 100vh;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  background-color: #f8f9fd;
+/*ESTILOS DEL REGISTER*/
+#h1Register{
+  text-Align: center;
+  color:#0E8388;
 }
+#formRegister{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-input[type="text"],
-input[type="password"] {
-  height: 25px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-input[type="submit"] {
-  margin-top: 10px;
-  cursor: pointer;
-  font-size: 15px;
-  background: #01d28e;
-  border: 1px solid #01d28e;
-  color: #fff;
-  padding: 10px 20px;
-}
-
-input[type="submit"]:hover {
-  background: #6cf0c2;
-}
-
-.button-container {
-  display: flex;
-  justify-content: center;
-}
-
-.login-form {
-  background-color: white;
+  text-align: center;
+  display: grid;
+  align-Items: center;
+  background-color: #424242;
   padding: 2rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 40px;
+  width: 30%;
+  padding-top: 30px;
+  box-shadow: 5px 5px 5px 5px rgb(104, 101, 101);
 }
+#inputNombreRegister,#inputApellidoRegister,#inputDniRegister,
+#inputEmailRegister,#inputPasswordRegister{
+  margin-Bottom: 10px;
+  padding: 15px;
+  background-color: #424242;
+  border: 1px solid;
+  border-radius: 15px;
+  font-size: 15px;
+}
+#botonRegistrarse{
+  background-Color: #0E8388;
+  color: #ffffff;
+  padding: 8px 16px;
+}
+#botonAtras{
+  background-Color: #0E8388;
+  color: #ffffff;
+  padding: 8px 16px;
 
-.list-container {
-  display: flex;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-
-.error {
-  color: red;
-  font-size: 12px;
-}
-
-.title {
-  font-size: 25px;
-  margin-bottom: 20px;
-}
-
-.input-container {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin: 10px;
-}
-*/

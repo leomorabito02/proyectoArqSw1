@@ -61,27 +61,27 @@ const Register = () =>{
 
     //parte visible
     return(
-        <div>
+        
             <div id="body">
             <h2 id="h1Register">Registrarse</h2>
             <form id="formRegister" onSubmit={handleSubmit} >
                 <input id={"inputNombreRegister"}
-                    type="nombre"
+                    type="text"
                     placeholder="Nombre"
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
                 />
                 <input id={"inputApellidoRegister"}
-                    type="apellido"
+                    type="text"
                     placeholder="Apellido"
                     value={apellido}
                     onChange={(e) => setApellido(e.target.value)}
                 />
                 <input id={"inputDniRegister"}
-                    type="dni"
+                    type="number"
                     placeholder="DNI"
                     value={dni}
-                    onChange={(e) => setDni(e.target.value)}
+                    onChange={(e) => setDni(parseInt(e.target.value))}
                 />
                 <input id={"inputEmailRegister"}
                     type="email"
@@ -95,14 +95,14 @@ const Register = () =>{
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <br/>
-                <button id="botonRegistrarse" type="submit" onClick={register}>Registrarse</button>
+                
+                <button id="botonRegistrarse" type="submit">Registrarse</button>
                 
             </form>
             <br/>
-            <button id="botonRegistrarse" onClick={register1}>Atras</button>
+            <button id="botonAtras" onClick={register1}>Atras</button>
         </div>
-        </div>
+    
         
     );
 };
